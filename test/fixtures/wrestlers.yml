@@ -1,0 +1,31 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  age: 1
+  img: MyString
+  current_rank: MyString
+  highest_rank: MyString
+  yusho: 1
+  shukun_sho: 1
+  kanto_sho: 1
+  gino_sho: 1
+  kinboshi: 1
+  heya: MyString
+  height: 1
+  weight: 1
+
+two:
+  name: MyString
+  age: 1
+  img: MyString
+  current_rank: MyString
+  highest_rank: MyString
+  yusho: 1
+  shukun_sho: 1
+  kanto_sho: 1
+  gino_sho: 1
+  kinboshi: 1
+  heya: MyString
+  height: 1
+  weight: 1
