@@ -1,2 +1,0 @@
-class WrestlersController < ApplicationController
-end
