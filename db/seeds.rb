@@ -16,12 +16,25 @@ league = League.create(name: "league")
 
 #CREATES USERS
 john = User.new(name: "John", password: "john", email: "johnrusch7@gmail.com")
+john.leagues << league
+
 tommy = User.new(name: "Tommy", password: "tommy")
+tommy.leagues << league
+
 mason = User.new(name: "Mason", password: "mason")
+mason.leagues << league
+
 reid = User.new(name: "Reid", password: "reid")
+reid.leagues << league
+
 matt = User.new(name: "Matt", password: "matt")
+matt.leagues << league
+
 glenn = User.new(name: "Glenn", password: "glenn")
+glenn.leagues << league
+
 josh = User.new(name: "Josh", password: "josh")
+josh.leagues << league
 
 #CREATES TEAMS
 john_team = Team.new(name: "john_team", points: 0)
