@@ -24,8 +24,7 @@ class ApplicationController < ActionController::API
     end
 
     def user_id
-        decoded_token.first
-        ['user_id']
+        decoded_token.first['user_id']
     end
 
     def logged_in?
