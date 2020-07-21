@@ -3,7 +3,9 @@ class LeagueSerializer < ActiveModel::Serializer
 
   def teams
     self.object.teams.map do |team|
-      {name: team.name,
+      {
+      id: team.id,
+      name: team.name,
       user: team.user,
       points: team.points
       }
