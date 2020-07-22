@@ -22,7 +22,7 @@ class Api::V1::AuthController < ApplicationController
                 name: @user.name
             }
         else
-            render json: {error: "User Not Found"}, status: 401
+            render json: {error: "NUH UH"}, status: 401
         end
     end
 end
