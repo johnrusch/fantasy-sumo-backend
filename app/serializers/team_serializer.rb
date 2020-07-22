@@ -1,6 +1,7 @@
 class TeamSerializer < ActiveModel::Serializer
   belongs_to :user
-  attributes :id, :name, :points, :league, :wrestlers
+  has_many :wrestlers, serializer: WrestlerSerializer
+  attributes :id, :name, :points, :league
 
   def rank(current_rank)
     case current_rank
@@ -17,16 +18,16 @@ class TeamSerializer < ActiveModel::Serializer
     end
   end
 
-  def wrestlers
-    self.object.wrestlers.map do |wrestler|
-      {
-      id: wrestler.id,
-      name: wrestler.name,
-      img: wrestler.img,
-      currentRank: rank(wrestler.current_rank)
-      }
-    end
-  end
+  # def wrestlers
+  #   self.object.wrestlers.map do |wrestler|
+  #     {
+  #     id: wrestler.id,
+  #     name: wrestler.name,
+  #     img: wrestler.img,
+  #     currentRank: rank(wrestler.current_rank)
+  #     }
+  #   end
+  # end
 
 
 end
