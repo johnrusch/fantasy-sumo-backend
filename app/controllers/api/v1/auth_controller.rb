@@ -2,6 +2,7 @@ class Api::V1::AuthController < ApplicationController
 
     def create
         user = User.find_by(name: params[:name])
+        # byebug
         if user && user.authenticate(params[:password])
             token = issue_token(user)
             render json: {
