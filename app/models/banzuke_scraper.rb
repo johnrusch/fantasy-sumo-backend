@@ -1,9 +1,9 @@
 require 'nokogiri'
 require 'open-uri'
-require 'pry'
+# require 'pry'
 
 class BanzukeScraper
-    def scrape_results_page
+    def scrape_banzuke
 
         results_url = 'http://sumodb.sumogames.de/'
 
@@ -12,59 +12,20 @@ class BanzukeScraper
         # gets matches table
         banzuke_rows = doc.css(".banzuke").css("tbody").css("tr")
         
-        ranks = [0, "K", "S", "O", "Y"]
-        wrestler_rows.each do |row|
-
-            east_wrestler = row.css(".tk_east").css("a").first.children.text
+        banzuke_rows.each do |row|
+            east_wrestler = row.css(".shikona").first.css("a").text
             e_wrestler = Wrestler.find_or_create_by(name: east_wrestler)
-            if ranks.include?(e_wrestler.current_rank)
-                e_wrestler_rank = ranks.index(e_wrestler.current_rank)
-            else
-                e_wrestler_rank = 0
-            end
 
-            west_wrestler = row.css(".tk_west").css("a").first.children.text
+            west_wrestler = row.css(".shikona").last.css("a").text
             w_wrestler = Wrestler.find_or_create_by(name: west_wrestler)
-            if ranks.include?(w_wrestler.current_rank)
-                w_wrestler_rank = ranks.index(w_wrestler.current_rank)
-            else
-                w_wrestler_rank = 0
-            end
 
+            e_wrestler_record = row.css("td").first.css("a").text
+            w_wrestler_record = row.css("td").last.css("a").text
+            e_wrestler.current_record = e_wrestler_record
+            w_wrestler.current_record = w_wrestler_record
 
-            kimarite = row.css(".tk_kim").first.children[1].text
-            win_or_loss = row.css(".tk_kekka").css("img").attribute('src').value
-            if win_or_loss == "img/hoshi_shiro.gif"
-                winner = e_wrestler
-                if e_wrestler_rank >= w_wrestler_rank
-                    points = 1
-                else
-                    points = 1 + (w_wrestler_rank - e_wrestler_rank)
-                end
-            else
-                winner = w_wrestler
-                if w_wrestler_rank >= e_wrestler_rank
-                    points = 1
-                else
-                    points = 1 + (e_wrestler_rank - w_wrestler_rank)
-                end
-            end
-            
-            match_data = {
-                day: day,
-                kimarite: kimarite,
-                winner: winner.name,
-                points: points
-            }
-            match = Match.new(match_data)
-            match.wrestlers << [e_wrestler, w_wrestler]
-            match.save
-
-            winner.teams.each do |team|
-                team.points += match.points
-                team.save
-            end
-
+            e_wrestler.save
+            w_wrestler.save
         end
 
 
@@ -72,3 +33,6 @@ class BanzukeScraper
     end
 
 end
+
+# banzuke_scraper = BanzukeScraper.new
+# banzuke_scraper.scrape_page

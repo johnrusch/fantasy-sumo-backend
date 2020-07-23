@@ -109,6 +109,10 @@ josh_team.league = league
 josh_team.save
 josh.save
 
+#SCRAPES BANZUKE
+# banzuke_scrape = BanzukeScraper.new
+# banzuke_scrape.scrape_banzuke
+
 #SCRAPES MATCH DATA
 scrape = Scraper.new
 scrape.scrape_results_page

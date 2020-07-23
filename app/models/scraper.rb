@@ -22,6 +22,7 @@ class Scraper
 
             east_wrestler = row.css(".tk_east").css("a").first.children.text
             e_wrestler = Wrestler.find_or_create_by(name: east_wrestler)
+            e_wrestler.division = "East"
             if ranks.include?(e_wrestler.current_rank)
                 e_wrestler_rank = ranks.index(e_wrestler.current_rank)
             else
@@ -30,6 +31,7 @@ class Scraper
 
             west_wrestler = row.css(".tk_west").css("a").first.children.text
             w_wrestler = Wrestler.find_or_create_by(name: west_wrestler)
+            w_wrestler.division = "West"
             if ranks.include?(w_wrestler.current_rank)
                 w_wrestler_rank = ranks.index(w_wrestler.current_rank)
             else
@@ -41,18 +43,14 @@ class Scraper
             win_or_loss = row.css(".tk_kekka").css("img").attribute('src').value
             if win_or_loss == "img/hoshi_shiro.gif"
                 winner = e_wrestler
-                if e_wrestler_rank >= w_wrestler_rank
-                    points = 1
-                else
-                    points = 1 + (w_wrestler_rank - e_wrestler_rank)
-                end
+                e_wrestler.current_wins += 1 
+                w_wrestler.current_losses += 1
+                e_wrestler_rank >= w_wrestler_rank ? points = 1 : points = 1 + (w_wrestler_rank - e_wrestler_rank)
             else
                 winner = w_wrestler
-                if w_wrestler_rank >= e_wrestler_rank
-                    points = 1
-                else
-                    points = 1 + (e_wrestler_rank - w_wrestler_rank)
-                end
+                w_wrestler.current_wins += 1 
+                e_wrestler.current_losses += 1
+                w_wrestler_rank >= e_wrestler_rank ? points = 1 : points = 1 + (e_wrestler_rank - w_wrestler_rank)
             end
             
             match_data = {
