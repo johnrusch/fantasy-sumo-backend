@@ -17,6 +17,7 @@ class CreateWrestlers < ActiveRecord::Migration[6.0]
       t.string :heya
       t.integer :height
       t.integer :weight
+      t.boolean :active
 
       t.timestamps
     end
