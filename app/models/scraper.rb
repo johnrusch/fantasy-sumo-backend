@@ -24,6 +24,8 @@ class Scraper
             e_wrestler = Wrestler.find_or_create_by(name: east_wrestler)
             if !e_wrestler.current_rank
                 e_wrestler.current_rank = "Juryo"
+                e_wrestler.current_wins = 0
+                e_wrestler.current_losses = 0
             end
             e_wrestler.division = "East"
             if ranks.include?(e_wrestler.current_rank)
@@ -36,6 +38,8 @@ class Scraper
             w_wrestler = Wrestler.find_or_create_by(name: west_wrestler)
             if !w_wrestler.current_rank
                 w_wrestler.current_rank = "Juryo"
+                w_wrestler.current_wins = 0
+                w_wrestler.current_losses = 0
             end
             w_wrestler.division = "West"
             if ranks.include?(w_wrestler.current_rank)

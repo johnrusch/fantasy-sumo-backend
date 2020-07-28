@@ -24,8 +24,11 @@ class WrestlerSerializer < ActiveModel::Serializer
       return "Sekiwake"
     when "K"
       return "Komusubi"
+    when "Juryo"
+      return "Juryo"
     else
-      return "Maegashira #{current_rank.to_i}"
+      int = current_rank.scan(/\d+/).first
+      return "Maegashira #{int.to_i}"
     end
   end
 
