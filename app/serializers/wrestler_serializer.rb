@@ -8,12 +8,6 @@ class WrestlerSerializer < ActiveModel::Serializer
   attribute :kanto_sho, key: :kantoSho
   attribute :gino_sho, key: :ginoSho
 
-  yokozuna = Wrestler.yokozuna
-  ozeki = Wrestler.ozeki
-  sekiwake = Wrestler.sekiwake
-  komusubi = Wrestler.komusubi
-  maegashira = Wrestler.maegashira
-
   def rank(current_rank)
     case current_rank
     when "Y"
