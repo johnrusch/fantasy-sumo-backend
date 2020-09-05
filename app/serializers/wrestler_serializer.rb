@@ -8,6 +8,8 @@ class WrestlerSerializer < ActiveModel::Serializer
   attribute :kanto_sho, key: :kantoSho
   attribute :gino_sho, key: :ginoSho
 
+  has_many :records
+
   def rank(current_rank)
     case current_rank
     when "Y"
