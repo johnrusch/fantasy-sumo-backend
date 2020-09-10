@@ -17,7 +17,10 @@ ActiveRecord::Schema.define(version: 2020_07_23_221228) do
 
   create_table "leagues", force: :cascade do |t|
     t.string "name"
+    t.integer "number_of_teams"
+    t.boolean "closed"
     t.integer "creator_id"
+    t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

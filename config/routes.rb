@@ -12,6 +12,10 @@ Rails.application.routes.draw do
       'auth#show'
       get '/banzuke', to:
       'wrestlers#banzuke'
+      get '/user_leagues', to:
+      'leagues#user_leagues'
+      get '/open_leagues', to:
+      'leagues#open_leagues'
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

@@ -1,7 +1,17 @@
 class Api::V1::LeaguesController < ApplicationController
 
     def index
+        leagues = League.all
+        render json: leagues
+    end
+
+    def user_leagues
         leagues = current_user.leagues
+        render json: leagues
+    end
+
+    def open_leagues
+        leagues = League.all.select{|l| l.closed == false}
         render json: leagues
     end
 

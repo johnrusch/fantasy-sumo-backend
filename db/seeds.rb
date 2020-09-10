@@ -12,7 +12,8 @@ Team.destroy_all
 League.destroy_all
 
 #CREATES LEAGUE
-league = League.create(name: "league")
+league = League.create(name: "league", closed: true, password: "league")
+
 
 #CREATES USERS
 john = User.new(name: "John", password: "john", email: "johnrusch7@gmail.com")
