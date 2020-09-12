@@ -14,6 +14,7 @@ namespace :import do
       wrestler_data = Hash[[headers, row].transpose]
 
       wrestler = Wrestler.new(wrestler_data)
+      wrestler.name = wrestler.name.capitalize()
       wrestler.current_wins = 0
       wrestler.current_losses = 0
       wrestler.active = true
