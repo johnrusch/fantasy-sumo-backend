@@ -12,7 +12,7 @@ Team.destroy_all
 League.destroy_all
 
 #CREATES LEAGUE
-league = League.create(name: "league", closed: true, password: "league")
+league = League.create(name: "desire_urboys", closed: true, password: "league")
 
 
 #CREATES USERS
@@ -47,7 +47,7 @@ glenn_team = Team.new(name: "glenn_team", points: 0)
 josh_team = Team.new(name: "josh_team", points: 0)
 
 #ADDS WRESTLERS TO EACH TEAM
-john_wrestlers = ["Mitakeumi", "Takanosho", "Enho", "Kagayaki", "Ishiura"]
+john_wrestlers = ["Asanoyama", "Yutakayama", "Enho", "Kotoeko", "Chiyotairyu"]
 john_wrestlers.each do |wrestler|
     john_team.wrestlers << Wrestler.find_by(name: wrestler)
 end
@@ -56,7 +56,7 @@ john_team.league = league
 john_team.save
 john.save
 
-tommy_wrestlers = ["Kakuryu", "Takayasu", "Ikioi", "Shimanoumi", "Chiyomaru"]
+tommy_wrestlers = ["Takakeisho", "Terutsoyoshi", "Tochinoshin", "Sadanoumi", "Kotoshogiku"]
 tommy_wrestlers.each do |wrestler|
     tommy_team.wrestlers << Wrestler.find_by(name: wrestler)
 end
@@ -65,7 +65,7 @@ tommy_team.league = league
 tommy_team.save
 tommy.save
 
-mason_wrestlers = ["Asanoyama", "Yutakayama", "Abi", "Onosho", "Kotonowaka"]
+mason_wrestlers = ["Terunofuji", "Hokutofuji", "Ryuden", "Meisei", "Hoshoryu"]
 mason_wrestlers.each do |wrestler|
     mason_team.wrestlers << Wrestler.find_by(name: wrestler)
 end
@@ -74,7 +74,7 @@ mason_team.league = league
 mason_team.save
 mason.save
 
-reid_wrestlers = ["Hakuho", "Kiribayama", "Hokutofuji", "Kaisei", "Tamawashi"]
+reid_wrestlers = ["Okinoumi", "Endo", "Kagayaki", "Aoiyama", "Shimanoumi"]
 reid_wrestlers.each do |wrestler|
     reid_team.wrestlers << Wrestler.find_by(name: wrestler)
 end
@@ -83,7 +83,7 @@ reid_team.league = league
 reid_team.save
 reid.save
 
-matt_wrestlers = ["Shodai", "Ryuden", "Aoiyama", "Nishikigi", "Terutsuyoshi"]
+matt_wrestlers = ["Shodai", "Myogiryu", "Kiribayama", "Onosho", "Kotoshoho"]
 matt_wrestlers.each do |wrestler|
     matt_team.wrestlers << Wrestler.find_by(name: wrestler)
 end
@@ -92,7 +92,7 @@ matt_team.league = league
 matt_team.save
 matt.save
 
-glenn_wrestlers = ["Endo", "Wakatakakage", "Daieisho", "Takarafuji", "Kotoshoho"]
+glenn_wrestlers = ["Daieisho", "Takanosho", "Takayasu", "Wakatakakage", "Tobizaru"]
 glenn_wrestlers.each do |wrestler|
     glenn_team.wrestlers << Wrestler.find_by(name: wrestler)
 end
@@ -101,7 +101,7 @@ glenn_team.league = league
 glenn_team.save
 glenn.save
 
-josh_wrestlers = ["Takakeisho", "Okinoumi", "Tochinoshin", "Tokushoryu", "Shohozan"]
+josh_wrestlers = ["Mitakeumi", "Tamawashi", "Takarafuji", "Tokushoryu", "Kaisei"]
 josh_wrestlers.each do |wrestler|
     josh_team.wrestlers << Wrestler.find_by(name: wrestler)
 end
