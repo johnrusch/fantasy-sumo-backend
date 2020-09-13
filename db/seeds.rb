@@ -56,7 +56,7 @@ john_team.league = league
 john_team.save
 john.save
 
-tommy_wrestlers = ["Takakeisho", "Terutsoyoshi", "Tochinoshin", "Sadanoumi", "Kotoshogiku"]
+tommy_wrestlers = ["Takakeisho", "Terutsuyoshi", "Tochinoshin", "Sadanoumi", "Kotoshogiku"]
 tommy_wrestlers.each do |wrestler|
     tommy_team.wrestlers << Wrestler.find_by(name: wrestler)
 end
