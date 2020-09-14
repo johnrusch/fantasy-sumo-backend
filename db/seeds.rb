@@ -117,5 +117,6 @@ josh.save
 #SCRAPES MATCH DATA
 scrape = Scraper.new
 scrape.scrape_results_page('http://sumodb.sumogames.de/Results.aspx?b=202009&d=1')
+scrape.scrape_results_page('http://sumodb.sumogames.de/Results.aspx?b=202009&d=2')
 
 
