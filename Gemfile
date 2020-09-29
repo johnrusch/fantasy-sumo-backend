@@ -46,3 +46,5 @@ gem 'roo', '~> 2.8'
 gem 'nokogiri'
 
 gem 'active_model_serializers'
+
+gem 'whenever', require: false

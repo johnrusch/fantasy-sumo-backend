@@ -46,8 +46,8 @@ ActiveRecord::Schema.define(version: 2020_07_23_221228) do
 
   create_table "records", force: :cascade do |t|
     t.string "tournament"
-    t.integer "wins"
-    t.integer "losses"
+    t.integer "wins", default: 0
+    t.integer "losses", default: 0
     t.bigint "wrestler_id"
     t.index ["wrestler_id"], name: "index_records_on_wrestler_id"
   end
@@ -84,8 +84,6 @@ ActiveRecord::Schema.define(version: 2020_07_23_221228) do
     t.string "current_rank"
     t.string "highest_rank"
     t.string "division"
-    t.integer "current_wins"
-    t.integer "current_losses"
     t.integer "yusho"
     t.integer "shukun_sho"
     t.integer "kanto_sho"
