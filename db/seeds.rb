@@ -115,8 +115,8 @@ josh.save
 # banzuke_scrape.scrape_banzuke
 
 #SCRAPES MATCH DATA
-scrape = Scraper.new
-scrape.scrape_results_page('http://sumodb.sumogames.de/Results.aspx?b=202009&d=1')
-scrape.scrape_results_page('http://sumodb.sumogames.de/Results.aspx?b=202009&d=2')
+# scrape = Scraper.new
+# scrape.scrape_results_page('http://sumodb.sumogames.de/Results.aspx?b=202009&d=1')
+# scrape.scrape_results_page('http://sumodb.sumogames.de/Results.aspx?b=202009&d=2')
 
 

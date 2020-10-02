@@ -6,8 +6,10 @@ namespace :import do
     puts "Importing Data"
 
     data = Roo::Spreadsheet.open('lib/Wrestler_stats.xlsx')
+    #sets headers to the first row from spreadsheet
     headers = data.row(1)
 
+    #goes through each wrestler and creates data hash
     data.each_with_index do |row, idx|
       next if idx == 0
 
@@ -15,8 +17,7 @@ namespace :import do
 
       wrestler = Wrestler.new(wrestler_data)
       wrestler.name = wrestler.name.capitalize()
-      wrestler.current_wins = 0
-      wrestler.current_losses = 0
+
       wrestler.active = true
       puts "Saving #{wrestler.name}"
       wrestler.save!
@@ -42,14 +43,17 @@ namespace :import do
         record_hash[:tournament] = record[0]
         record_hash[:wins] = wins
         record_hash[:losses] = losses
-        # puts record_hash
         new_record = Record.new(record_hash)
         wrestler.records << new_record
       end
-
-      # puts record_data
       
     end
+
+  end
+
+  task :matches, [:url, :tournament] do |t, args|
+    scrape = Scraper.new
+    scrape.scrape_results_page(args[:url], args[:tournament])
   end
   
 end
