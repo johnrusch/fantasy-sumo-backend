@@ -54,6 +54,7 @@ namespace :import do
   task :matches, [:url, :tournament] => [:environment] do |t, args|
     scrape = Scraper.new
     scrape.scrape_results_page(args[:url], args[:tournament])
+    puts "successful scrape!"
   end
   
 end
