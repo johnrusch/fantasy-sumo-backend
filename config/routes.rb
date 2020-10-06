@@ -4,7 +4,6 @@ Rails.application.routes.draw do
       resources :matches
       resources :wrestlers
       resources :teams
-      resources :leagues
       resources :users
       post '/auth', to:
       'auth#create'
