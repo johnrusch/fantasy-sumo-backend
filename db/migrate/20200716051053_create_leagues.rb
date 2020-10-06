@@ -5,7 +5,7 @@ class CreateLeagues < ActiveRecord::Migration[6.0]
       t.integer :number_of_teams
       t.boolean :closed
       t.integer :creator_id
-      t.string :password_digest
+      t.string :passphrase
 
       t.timestamps
     end
