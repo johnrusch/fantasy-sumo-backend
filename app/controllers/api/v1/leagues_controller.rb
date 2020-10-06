@@ -6,7 +6,7 @@ class Api::V1::LeaguesController < ApplicationController
     end
 
     def user_leagues
-        byebug
+        puts current_user
         leagues = current_user.leagues
         render json: leagues
     end
