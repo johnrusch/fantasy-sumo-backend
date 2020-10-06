@@ -12,7 +12,7 @@ Team.destroy_all
 League.destroy_all
 
 #CREATES LEAGUE
-league = League.create(name: "desire_urboys", closed: true, password: "league")
+league = League.create(name: "desire_urboys", closed: true, passphrase: "league")
 
 
 #CREATES USERS
