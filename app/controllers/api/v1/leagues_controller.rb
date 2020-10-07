@@ -6,8 +6,8 @@ class Api::V1::LeaguesController < ApplicationController
     end
 
     def user_leagues
-        puts current_user
         leagues = current_user.leagues
+        puts leagues
         render json: leagues
     end
 
