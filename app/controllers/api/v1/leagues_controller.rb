@@ -18,7 +18,6 @@ class Api::V1::LeaguesController < ApplicationController
 
     def create
         @league = League.create(league_params)
-        # byebug
         if @league.valid? && @league.authenticate(params[:password])
             # token = issue_token(@league)
             render json: {id: @league.id, name: @league.name}
