@@ -27,6 +27,6 @@ class Api::V1::LeaguesController < ApplicationController
 
     private
     def league_params
-        params.permit(:id, :name, :passphrase, :teams, :closed, :creator_id)
+        params.permit(:id, :name, :passphrase, :closed, :creator_id)
     end
 end
