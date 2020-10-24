@@ -17,8 +17,9 @@ class Api::V1::LeaguesController < ApplicationController
     end
 
     def create
-        @league = League.create(league_params)
+        @league = League.new(league_params)
         if @league.valid?
+            @league.save
             render json: {id: @league.id, name: @league.name}
         else
             render json: { error: 'Failed to create user' }, status: :not_acceptable
