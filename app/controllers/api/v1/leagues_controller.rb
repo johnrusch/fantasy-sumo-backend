@@ -19,6 +19,7 @@ class Api::V1::LeaguesController < ApplicationController
     def create
         @league = League.new(league_params)
         if @league.valid?
+            current_user.leagues.push(@league)
             @league.save
             render json: {id: @league.id, name: @league.name}
         else
