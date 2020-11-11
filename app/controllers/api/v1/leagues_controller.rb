@@ -7,7 +7,6 @@ class Api::V1::LeaguesController < ApplicationController
 
     def user_leagues
         leagues = current_user.leagues
-        puts leagues
         render json: leagues
     end
 
@@ -26,6 +25,12 @@ class Api::V1::LeaguesController < ApplicationController
             render json: { error: 'Failed to create user' }, status: :not_acceptable
         end
     end
+    
+    def add_user_to_league
+        league = League.find {|league| league.id == league_params.id}
+        
+    end
+
 
     private
     def league_params
