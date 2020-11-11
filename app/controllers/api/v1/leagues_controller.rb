@@ -20,20 +20,21 @@ class Api::V1::LeaguesController < ApplicationController
         if @league.valid?
             current_user.leagues.push(@league)
             @league.save
-            render json: {id: @league.id, name: @league.name}
+            render json: {id: @league.id, name: @league.name, closed: false, creator_id: @league.creator_id}
         else
             render json: { error: 'Failed to create user' }, status: :not_acceptable
         end
     end
     
     def add_user_to_league
-        league = League.find {|league| league.id == league_params.id}
-        
+        league = League.find {|league| league.id == league_params.leagueID}
+        user = User.find {|user| user.id == league_params.userID}
+        league.users << user
     end
 
 
     private
     def league_params
-        params.permit(:id, :name, :passphrase, :closed, :creator_id)
+        params.permit(:id, :name, :passphrase, :closed, :creator_id, :leagueID, :userID)
     end
 end
