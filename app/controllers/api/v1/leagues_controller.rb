@@ -29,7 +29,6 @@ class Api::V1::LeaguesController < ApplicationController
     def update
         league = League.find {|league| league.id == league_params.leagueID}
         user = User.find {|user| user.id == league_params.userID}
-        byebug
         league.users << user
     end
 
