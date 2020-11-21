@@ -27,8 +27,8 @@ class Api::V1::LeaguesController < ApplicationController
     end
     
     def update
-        league = League.find {|league| league.id == league_params.leagueID}
-        user = User.find {|user| user.id == league_params.userID}
+        league = League.all.find {|league| league.id == league_params.leagueID}
+        user = User.all.find {|user| user.id == league_params.userID}
         league.users << user
     end
 
