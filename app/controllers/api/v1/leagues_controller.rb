@@ -27,15 +27,14 @@ class Api::V1::LeaguesController < ApplicationController
     end
     
     def update
-        puts league_params.leagueID
-        league = League.all.find {|league| league.id == league_params.leagueID}
-        user = User.all.find {|user| user.id == league_params.userID}
+        league = League.all.find {|league| league.id == league_params[:leagueID]}
+        user = User.all.find {|user| user.id == league_params[:userID]}
         league.users << user
     end
 
 
     private
     def league_params
-        params.permit(:id, :name, :passphrase, :closed, :creator_id, :leagueID, :userID)
+        params.require(:league).permit(:id, :name, :passphrase, :closed, :creator_id, :leagueID, :userID)
     end
 end
