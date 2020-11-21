@@ -29,7 +29,11 @@ class Api::V1::LeaguesController < ApplicationController
     def update
         league = League.all.find {|league| league.id == league_params[:leagueID]}
         user = User.all.find {|user| user.id == league_params[:userID]}
-        league.users << user
+        if league && user
+            league.users << user
+            league.save
+            render json: league
+        end
     end
 
 
