@@ -27,6 +27,7 @@ class Api::V1::LeaguesController < ApplicationController
     end
     
     def update
+        puts league_params
         league = League.all.find {|league| league.id == league_params.leagueID}
         user = User.all.find {|user| user.id == league_params.userID}
         league.users << user
