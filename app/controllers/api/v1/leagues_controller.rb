@@ -27,7 +27,7 @@ class Api::V1::LeaguesController < ApplicationController
 
             @team.save
             @league.save
-            render json: {id: @league.id, name: @league.name, closed: false, creator_id: @league.creator_id}
+            render json: {id: @league.id, name: @league.name, closed: false, creator_id: @league.creator_id, teams: @league.teams}
         else
             render json: { error: 'Failed to create user' }, status: :not_acceptable
         end
