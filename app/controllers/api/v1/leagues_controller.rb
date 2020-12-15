@@ -19,6 +19,13 @@ class Api::V1::LeaguesController < ApplicationController
         @league = League.new(league_params)
         if @league.valid?
             current_user.leagues.push(@league)
+
+            @team = Team.new
+            @team.name = `#{current_user.name}'s #{@league.name} Team`
+            current_user.teams.push(@team)
+            @league.teams.push(@team)
+
+            @team.save
             @league.save
             render json: {id: @league.id, name: @league.name, closed: false, creator_id: @league.creator_id}
         else
@@ -31,6 +38,11 @@ class Api::V1::LeaguesController < ApplicationController
         user = User.all.find {|user| user.id == league_params[:userID]}
         if league && user
             league.users << user
+            team = Team.new
+            team.name = `#{user.name}'s #{league.name} Team`
+            user.teams << team
+            league.teams << team
+            team.save
             league.save
             render json: league
         end
