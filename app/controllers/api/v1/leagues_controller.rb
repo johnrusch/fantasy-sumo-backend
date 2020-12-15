@@ -20,8 +20,7 @@ class Api::V1::LeaguesController < ApplicationController
         if @league.valid?
             current_user.leagues.push(@league)
 
-            @team = Team.new(name: "New Team")
-            # @team.name = `#{current_user.name}'s #{@league.name} Team`
+            @team = Team.new(name: `#{current_user.name}'s #{@league.name} Team`)
             current_user.teams.push(@team)
             @league.teams.push(@team)
 
@@ -38,8 +37,7 @@ class Api::V1::LeaguesController < ApplicationController
         user = User.all.find {|user| user.id == league_params[:userID]}
         if league && user
             league.users << user
-            team = Team.new
-            # team.name = `#{user.name}'s #{league.name} Team`
+            team = Team.new(name: `#{current_user.name}'s #{@league.name} Team`)
             user.teams << team
             league.teams << team
             team.save
