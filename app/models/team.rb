@@ -6,7 +6,6 @@ class Team < ApplicationRecord
 
   def init
     self.points ||= 0
-    self.name ||= "My New Team"
   end
 
 end
