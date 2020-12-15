@@ -1,6 +1,6 @@
 require 'nokogiri'
 require 'open-uri'
-# require 'pry'
+require 'pry'
 
 class Scraper
     def scrape_results_page(results_url, tournament)
@@ -101,5 +101,16 @@ class Scraper
 
     end
 
+    def scrape_banzuke(url, tournament)
+        html = open(url)
+        doc = Nokogiri::HTML(html)
+
+        banzuke_rows = doc.css(".banzuke").css("tbody").children
+        binding.pry
+    end
+
 end
+
+scraper = Scraper.new
+scraper.scrape_banzuke('http://sumodb.sumogames.de/Banzuke.aspx', "November")
 
