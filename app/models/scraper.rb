@@ -3,6 +3,10 @@ require 'open-uri'
 require 'pry'
 
 class Scraper
+
+    #rank array
+    ranks = [0, "K", "S", "O", "Y"]
+
     def scrape_results_page(results_url, tournament)
     
         #opens and stores results page to be scraped
@@ -14,8 +18,8 @@ class Scraper
         day = doc.css(".layoutright").css("h1").first.text
         # removes day of tournament row
         wrestler_rows.shift()
-        #rank array to determine match points
-        ranks = [0, "K", "S", "O", "Y"]
+        # # rank array to determine match points
+        # ranks = [0, "K", "S", "O", "Y"]
 
         wrestler_rows.each do |row|
 
@@ -27,6 +31,9 @@ class Scraper
             ew_record = Record.find_or_create_by(tournament: tournament, wrestler: e_wrestler)
             #sets wrestler's division to current division
             e_wrestler.division = "East"
+
+            e_wrestler.save
+
             #sets wrestler's rank for point assessment
             if ranks.include?(e_wrestler.current_rank)
                 e_wrestler_rank = ranks.index(e_wrestler.current_rank)
@@ -42,6 +49,9 @@ class Scraper
             ww_record = Record.find_or_create_by(tournament: tournament, wrestler: w_wrestler)
             #sets wrestler's division to current division
             w_wrestler.division = "West"
+
+            w_wrestler.save
+
             #sets wrestler's rank for point assessment
             if ranks.include?(w_wrestler.current_rank)
                 w_wrestler_rank = ranks.index(w_wrestler.current_rank)
@@ -101,16 +111,33 @@ class Scraper
 
     end
 
-    def scrape_banzuke(url, tournament)
+    def scrape_banzuke(url)
         html = open(url)
         doc = Nokogiri::HTML(html)
 
-        banzuke_rows = doc.css(".banzuke").css("tbody").children
-        binding.pry
+        banzuke_rows = doc.css(".banzuke").css("tbody").children.css('tr')
+        banzuke_rows.each do |row|
+
+            rank = row.css(".short_rank").text
+
+            east_wrestler = row.css('.shikona').css('a').children.first.text
+            e_wrestler = Wrestler.find_or_create_by(name: east_wrestler)
+            e_wrestler.division = "East"
+            e_wrestler.current_rank = rank
+            e_wrestler.save
+
+            west_wrestler = row.css('.shikona').css('a').children.last.text
+            w_wrestler = Wrestler.find_or_create_by(name: west_wrestler)
+            w_wrestler.division = "West"
+            w_wrestler.current_rank = rank
+            w_wrestler.save
+
+            binding.pry
+        end
     end
 
 end
 
-scraper = Scraper.new
-scraper.scrape_banzuke('http://sumodb.sumogames.de/Banzuke.aspx', "November")
+# scraper = Scraper.new
+# scraper.scrape_banzuke('http://sumodb.sumogames.de/Banzuke.aspx', "November")
 
