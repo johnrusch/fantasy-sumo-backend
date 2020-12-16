@@ -119,6 +119,6 @@ josh.save
 # scrape.scrape_results_page('http://sumodb.sumogames.de/Results.aspx?b=202009&d=1')
 # scrape.scrape_results_page('http://sumodb.sumogames.de/Results.aspx?b=202009&d=2')
 
-scraper = Scraper.new
-scraper.scrape_banzuke('http://sumodb.sumogames.de/Banzuke.aspx')
+# scraper = Scraper.new
+# scraper.scrape_banzuke('http://sumodb.sumogames.de/Banzuke.aspx')
 

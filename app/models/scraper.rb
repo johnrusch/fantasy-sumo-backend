@@ -111,33 +111,35 @@ class Scraper
 
     end
 
-    def scrape_banzuke(url)
-        html = open(url)
-        doc = Nokogiri::HTML(html)
+    # NEEDS TO BE FIXED, SOMETIMES A SPOT IS MISSING IN THE BANZUKE
 
-        banzuke_rows = doc.css(".banzuke").css("tbody").children.css('tr')
-        banzuke_rows.each do |row|
+    # def scrape_banzuke(url)
+    #     html = open(url)
+    #     doc = Nokogiri::HTML(html)
 
-            rank = row.css(".short_rank").text
+    #     banzuke_rows = doc.css(".banzuke").css("tbody").children.css('tr')
+    #     banzuke_rows.each do |row|
 
-            east_wrestler = row.css('.shikona').css('a').children.first.text
-            e_wrestler = Wrestler.find_or_create_by(name: east_wrestler)
-            e_wrestler.division = "East"
-            e_wrestler.current_rank = rank
-            e_wrestler.save
+    #         rank = row.css(".short_rank").text
 
-            west_wrestler = row.css('.shikona').css('a').children.last.text
-            w_wrestler = Wrestler.find_or_create_by(name: west_wrestler)
-            w_wrestler.division = "West"
-            w_wrestler.current_rank = rank
-            w_wrestler.save
+    #         east_wrestler = row.css('.shikona').css('a').children.first.text
+    #         e_wrestler = Wrestler.find_or_create_by(name: east_wrestler)
+    #         e_wrestler.division = "East"
+    #         e_wrestler.current_rank = rank
+    #         e_wrestler.save
 
-            # binding.pry
-        end
-    end
+    #         west_wrestler = row.css('.shikona').css('a').children.last.text
+    #         w_wrestler = Wrestler.find_or_create_by(name: west_wrestler)
+    #         w_wrestler.division = "West"
+    #         w_wrestler.current_rank = rank
+    #         w_wrestler.save
+
+    #         # binding.pry
+    #     end
+    # end
 
 end
 
-scraper = Scraper.new
-scraper.scrape_banzuke('http://sumodb.sumogames.de/Banzuke.aspx')
+# scraper = Scraper.new
+# scraper.scrape_banzuke('http://sumodb.sumogames.de/Banzuke.aspx')
 
