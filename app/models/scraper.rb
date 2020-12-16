@@ -138,6 +138,6 @@ class Scraper
 
 end
 
-# scraper = Scraper.new
-# scraper.scrape_banzuke('http://sumodb.sumogames.de/Banzuke.aspx', "November")
+scraper = Scraper.new
+scraper.scrape_banzuke('http://sumodb.sumogames.de/Banzuke.aspx')
 
