@@ -1,6 +1,6 @@
 require 'nokogiri'
 require 'open-uri'
-require 'pry'
+# require 'pry'
 
 class Scraper
 
@@ -132,7 +132,7 @@ class Scraper
             w_wrestler.current_rank = rank
             w_wrestler.save
 
-            binding.pry
+            # binding.pry
         end
     end
 
