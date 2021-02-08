@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       'leagues#user_leagues'
       get '/open_leagues', to:
       'leagues#open_leagues'
+      mount ActionCable.server => '/cable'
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
