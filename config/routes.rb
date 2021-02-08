@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :wrestlers
       resources :teams
       resources :users
+      resources :drafts
       post '/auth', to:
       'auth#create'
       get '/current_user', to:
