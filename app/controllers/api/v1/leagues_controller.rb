@@ -37,7 +37,7 @@ class Api::V1::LeaguesController < ApplicationController
         user = User.all.find {|user| user.id == league_params[:userID]}
         if league && user
             league.users << user
-            team = Team.new(name: `#{current_user.name}'s #{@league.name} Team`)
+            team = Team.new(name: `#{user.name}'s #{league.name} Team`)
             user.teams << team
             league.teams << team
             team.save
