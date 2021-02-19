@@ -36,14 +36,21 @@ class Api::V1::LeaguesController < ApplicationController
         league = League.all.find {|league| league.id == league_params[:leagueID]}
         user = User.all.find {|user| user.id == league_params[:userID]}
         if league && user
-            league.users << user
-            team = Team.new(name: `#{user.name}'s #{league.name} Team`)
-            user.teams << team
-            league.teams << team
-            team.save
-            league.save
-            user.save
-            render json: league
+            if league.users.exists?(user.id)
+                render json: {
+                    message: "User already in league",
+                    status: 200
+                }, status: 200
+            else
+                league.users << user
+                team = Team.new(name: `#{user.name}'s #{league.name} Team`)
+                user.teams << team
+                team.save
+                league.teams << team
+                league.save
+                user.save
+                render json: league
+            end
         else   
             render json: { error: 'Failed to add user to league', league: league, user: user }, status: :not_acceptable
         end
