@@ -42,6 +42,7 @@ class Api::V1::LeaguesController < ApplicationController
             league.teams << team
             team.save
             league.save
+            user.save
             render json: league
         else   
             render json: { error: 'Failed to add user to league', league: league, user: user }, status: :not_acceptable
