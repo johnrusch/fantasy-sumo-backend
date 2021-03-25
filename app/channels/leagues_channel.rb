@@ -1,6 +1,6 @@
 class LeaguesChannel < ApplicationCable::Channel
     def subscribed
-      @league = League.find_by(id: params[:id])
+      @league = League.find_by(id: params[:leagueID])
       stream_for @league
     end
 
