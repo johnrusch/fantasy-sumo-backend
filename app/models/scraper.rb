@@ -64,29 +64,37 @@ class Scraper
             #stores 'winner' in variable
             win_or_loss = row.css(".tk_kekka").css("img").attribute('src').value
             #conditionals to determine winner and assess points
+            #east wrestler wins
             if win_or_loss == "img/hoshi_shiro.gif"
                 winner = e_wrestler
                 ew_record.wins += 1
                 ww_record.losses += 1
                 e_wrestler_rank >= w_wrestler_rank ? points = 1 : points = 1 + (w_wrestler_rank - e_wrestler_rank)
+            #west wrestler forfeited
             elsif win_or_loss == "img/hoshi_fusensho.gif"
                 winner = e_wrestler
                 ew_record.wins += 1
                 ww_record.losses += 1
                 points = 1
                 w_wrestler.active = false
+            #east wrestler forfeited
             elsif win_or_loss == "img/hoshi_fusenpai.gif"
                 winner = w_wrestler
                 ww_record.wins += 1
                 ew_record.losses += 1
                 points = 1
                 e_wrestler.active = false
+            #west wrestler wins
             else
                 winner = w_wrestler
                 ww_record.wins += 1
                 ew_record.losses += 1
                 w_wrestler_rank >= e_wrestler_rank ? points = 1 : points = 1 + (e_wrestler_rank - w_wrestler_rank)
             end
+
+            #saves each wrestler's current tournament record with the newest match
+            ew_record.save
+            ww_record.save
             
             #match data hash for creating a new match in db
             match_data = {
