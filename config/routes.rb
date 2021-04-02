@@ -14,6 +14,8 @@ Rails.application.routes.draw do
       'leagues#user_leagues'
       get '/open_leagues', to:
       'leagues#open_leagues'
+      post 'leagues/:id/start_draft', to:
+      'leagues#start_draft'
       mount ActionCable.server => '/cable'
     end
   end

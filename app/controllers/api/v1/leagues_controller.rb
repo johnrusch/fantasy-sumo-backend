@@ -56,6 +56,15 @@ class Api::V1::LeaguesController < ApplicationController
         end
     end
 
+    def start_draft
+        league = League.all.find {|league| league.id == league_params[:leagueID]}
+        if league
+            LeaguesChannel.broadcast_to(league, {
+                hey: "hey john"
+            })
+        end
+    end
+
     private
     def league_params
         params.permit(:id, :name, :passphrase, :closed, :creator_id, :leagueID, :userID)
