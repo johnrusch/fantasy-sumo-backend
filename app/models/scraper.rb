@@ -19,7 +19,7 @@ class Scraper
         # removes day of tournament row
         wrestler_rows.shift()
         # # rank array to determine match points
-        # ranks = [0, "K", "S", "O", "Y"]
+        ranks = [0, "K", "S", "O", "Y"]
 
         wrestler_rows.each do |row|
 
