@@ -17,42 +17,34 @@ class Api::V1::LeaguesController < ApplicationController
 
     def create
         @league = League.new(league_params)
-        if @league.valid?
-            current_user.leagues.push(@league)
-
-            @team = Team.new(name: `#{current_user.name}'s #{@league.name} Team`)
-            current_user.teams.push(@team)
-            @league.teams.push(@team)
-
-            @team.save
-            @league.save
-            render json: {id: @league.id, name: @league.name, closed: false, creator_id: @league.creator_id, teams: @league.teams}
-        else
-            render json: { error: 'Failed to create user' }, status: :not_acceptable
-        end
+        return render json: { error: 'Failed to create user' }, status: :not_acceptable unless @league.valid?
+        current_user.leagues.push(@league)
+        @team = Team.new(name: `#{current_user.name}'s #{@league.name} Team`)
+        current_user.teams.push(@team)
+        @league.teams.push(@team)
+        @team.save
+        @league.save
+        render json: {id: @league.id, name: @league.name, closed: false, creator_id: @league.creator_id, teams: @league.teams}
     end
-    
+
     def update
         league = League.all.find {|league| league.id == league_params[:leagueID]}
         user = User.all.find {|user| user.id == league_params[:userID]}
-        if league && user
-            if league.users.exists?(user.id)
-                render json: {
-                    message: "User already in league",
-                    status: 200
-                }, status: 200
-            else
-                league.users << user
-                team = Team.new(name: `#{user.name}'s #{league.name} Team`)
-                user.teams << team
-                team.save
-                league.teams << team
-                league.save
-                user.save
-                render json: league
-            end
-        else   
-            render json: { error: 'Failed to add user to league', league: league, user: user }, status: :not_acceptable
+        return render json: { error: 'Failed to add user to league', league: league, user: user }, status: :not_acceptable unless league && user 
+        if league.users.exists?(user.id)
+            render json: {
+                message: "User already in league",
+                status: 200
+            }, status: 200
+        else
+            league.users << user
+            team = Team.new(name: `#{user.name}'s #{league.name} Team`)
+            user.teams << team
+            team.save
+            league.teams << team
+            league.save
+            user.save
+            render json: league
         end
     end
 
