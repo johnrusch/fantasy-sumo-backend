@@ -52,7 +52,8 @@ class Api::V1::LeaguesController < ApplicationController
         league = League.all.find {|league| league.id == league_params[:leagueID]}
         if league
             LeaguesChannel.broadcast_to(league, {
-                hey: "hey john"
+                hey: "hey john",
+                start: true
             })
         end
     end
