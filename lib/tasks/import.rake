@@ -5,7 +5,7 @@ namespace :import do
   task data: :environment do
     puts "Importing Data"
 
-    data = Roo::Spreadsheet.open('lib/Wrestler_stats.xlsx')
+    data = Roo::Spreadsheet.open('lib/Wrestler_stats4_16.xlsx')
     #sets headers to the first row from spreadsheet
     headers = data.row(1)
 
