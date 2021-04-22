@@ -5,7 +5,7 @@ class Api::V1::AuthController < ApplicationController
         # byebug
         if user && user.authenticate(params[:password])
             token = issue_token(user)
-            cookies[:user_id] = user.id
+            session[:current_user_id] = user.id
             render json: {
                 id: user.id,
                 name: user.name,
