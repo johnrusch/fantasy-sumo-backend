@@ -1,4 +1,9 @@
 class LeaguesChannel < ApplicationCable::Channel
+  periodically every: 1.second do
+    transmit payload: 'ding'
+  end
+
+
     def subscribed
       @league = League.find_by(id: params[:leagueID])
       stream_for @league
