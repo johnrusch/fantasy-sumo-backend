@@ -14,7 +14,7 @@ class LeaguesChannel < ApplicationCable::Channel
 
     def appear
       LeaguesChannel.broadcast_to(@league, {
-        message: `#{@current_user} has joined the draft`
+        message: `#{current_user} has joined the draft`
       })
     end
   
