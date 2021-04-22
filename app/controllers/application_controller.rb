@@ -31,5 +31,5 @@ class ApplicationController < ActionController::API
         !!current_user
     end
 
-    cookies[:user_id] = current_user.id
+
 end
