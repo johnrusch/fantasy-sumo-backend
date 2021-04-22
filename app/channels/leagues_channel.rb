@@ -1,6 +1,6 @@
 class LeaguesChannel < ApplicationCable::Channel
   periodically every: 1.second do
-    transmit payload: 'ding'
+    transmit payload: { status: ok }
   end
 
 
