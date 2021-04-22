@@ -5,6 +5,7 @@ class LeaguesChannel < ApplicationCable::Channel
 
     def subscribed
       @league = League.find_by(id: params[:leagueID])
+      @user = User.find_by(id: params[:userID])
       stream_for @league
     end
 
@@ -14,7 +15,7 @@ class LeaguesChannel < ApplicationCable::Channel
 
     def appear
       LeaguesChannel.broadcast_to(@league, {
-        message: `#{current_user} has joined the draft`
+        message: `#{@user} has joined the draft`
       })
     end
   
