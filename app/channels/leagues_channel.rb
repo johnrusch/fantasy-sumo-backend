@@ -9,11 +9,13 @@ class LeaguesChannel < ApplicationCable::Channel
     end
 
     def received(data)
-        LeaguesChannel.broadcast_to(@league)
+      LeaguesChannel.broadcast_to(@league)
     end
 
-    def start_draft
-      
+    def appear
+      LeaguesChannel.broadcast_to(@league, {
+        message: `#{current_user} has joined the draft`
+      })
     end
   
     def unsubscribed
