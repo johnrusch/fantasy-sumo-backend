@@ -30,4 +30,6 @@ class ApplicationController < ActionController::API
     def logged_in?
         !!current_user
     end
+
+    cookies[:user_id] = current_user.id
 end
