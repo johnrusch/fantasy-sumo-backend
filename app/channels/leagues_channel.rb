@@ -15,11 +15,17 @@ class LeaguesChannel < ApplicationCable::Channel
 
     def appear
       LeaguesChannel.broadcast_to(@league, {
-        user_id: @user.id
+        user_id: @user.id,
+        status: "online"
       })
+      
     end
-  
+    
     def unsubscribed
-      # Any cleanup needed when channel is unsubscribed
+      LeaguesChannel.broadcast_to(@league, {
+        user_id: @user.id,
+        status: "offline"
+      })
+      
     end
   end
