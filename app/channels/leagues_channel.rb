@@ -18,7 +18,17 @@ class LeaguesChannel < ApplicationCable::Channel
         user_id: @user.id,
         status: "online"
       })
-      
+    end
+
+    def start_timer
+      time_remaining = 200
+      while (time_remaining >= 0) 
+        LeaguesChannel.broadcast_to(@league, {
+          time_remaining: time_remaining - 1
+        })
+        time_remaining = time_remaining - 1
+        sleep(1)
+      end
     end
     
     def unsubscribed
