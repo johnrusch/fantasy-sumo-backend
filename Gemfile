@@ -50,3 +50,5 @@ gem 'active_model_serializers'
 gem 'whenever', require: false
 
 gem 'redlock'
+
+gem 'rufus-scheduler', '3.0.2'
