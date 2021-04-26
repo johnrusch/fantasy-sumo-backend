@@ -7,8 +7,13 @@ class DraftsChannel < ApplicationCable::Channel
   end
 
   def start_timer
-    periodically every: 1.second do
-      transmit payload: "ding from drafts"
+    time_remaining = 200
+    while (time_remaining >= 0) 
+      LeaguesChannel.broadcast_to(@league, {
+        time_remaining: time_remaining - 1
+      })
+      time_remaining = time_remaining - 1
+      sleep(1)
     end
   end
 
