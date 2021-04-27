@@ -25,7 +25,7 @@ class LeaguesChannel < ApplicationCable::Channel
       timer = Rufus::Scheduler.new
         timer.every '1s' do |job|
           LeaguesChannel.broadcast_to(@league, {
-            message: "hey"
+            message: Time.at(time_remaining).utc.strftime("%M:%S")
           })  
           time_remaining -= 1
           if time_remaining < 0
