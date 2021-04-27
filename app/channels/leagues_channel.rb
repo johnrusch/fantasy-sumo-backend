@@ -21,13 +21,15 @@ class LeaguesChannel < ApplicationCable::Channel
     end
 
     def start_timer
-      time_remaining = 200
-      while (time_remaining >= 0) 
-        LeaguesChannel.broadcast_to(@league, {
-          time_remaining: time_remaining - 1
-        })
-        time_remaining = time_remaining - 1
-        sleep(1)
+      time_remaining = 7
+      timer = Rufus::Scheduler.new
+      while time_remaining > 0
+        timer.every '1s' do
+          LeaguesChannel.broadcast_to(@league, {
+            message: "hey"
+          })  
+        end
+        time_remaining -= 1
       end
     end
     
