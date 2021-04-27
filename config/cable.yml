@@ -1,5 +1,6 @@
 development:
   adapter: redis
+  url: redis://redistogo:8830550a87a2837ea6b0f85135fa91f3@spinyfin.redistogo.com:11828/
 
 test:
   adapter: test
