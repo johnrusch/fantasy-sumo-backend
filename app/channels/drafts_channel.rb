@@ -10,7 +10,7 @@ class DraftsChannel < ApplicationCable::Channel
     time_remaining = 7
       timer = Rufus::Scheduler.new
         timer.every '1s' do |job|
-          LeaguesChannel.broadcast_to(@league, {
+          DraftsChannel.broadcast_to(@league, {
             draftClock: Time.at(time_remaining).utc.strftime("%M:%S")
           })  
           time_remaining -= 1
