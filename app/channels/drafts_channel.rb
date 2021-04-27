@@ -15,7 +15,7 @@ class DraftsChannel < ApplicationCable::Channel
       ActionCable.server.broadcast "drafts_channel", draftClock: Time.at(time_remaining).utc.strftime("%M:%S")
       time_remaining -= 1
       if time_remaining < 0
-        job.unschedule
+        job.kill
       end
     end
   end
