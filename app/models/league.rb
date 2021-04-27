@@ -8,4 +8,6 @@ class League < ApplicationRecord
     current_user.leagues
   end
 
+  
+
 end

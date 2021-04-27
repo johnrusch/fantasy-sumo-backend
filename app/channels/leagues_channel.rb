@@ -1,7 +1,4 @@
 class LeaguesChannel < ApplicationCable::Channel
-  # periodically every: 1.second do
-  #   transmit payload: @t.total_time
-  # end
 
     def subscribed
       @league = League.find_by(id: params[:leagueID])
@@ -18,20 +15,6 @@ class LeaguesChannel < ApplicationCable::Channel
         user_id: @user.id,
         status: "online"
       })
-    end
-
-    def start_timer
-      time_remaining = 7
-      timer = Rufus::Scheduler.new
-        timer.every '1s' do |job|
-          LeaguesChannel.broadcast_to(@league, {
-            message: Time.at(time_remaining).utc.strftime("%M:%S")
-          })  
-          time_remaining -= 1
-          if time_remaining < 0
-            job.unschedule
-          end
-        end
     end
     
     def unsubscribed
