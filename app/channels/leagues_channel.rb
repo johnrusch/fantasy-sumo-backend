@@ -23,14 +23,15 @@ class LeaguesChannel < ApplicationCable::Channel
     def start_timer
       time_remaining = 7
       timer = Rufus::Scheduler.new
-      while time_remaining > 0
-        timer.every '1s' do
+        timer.every '1s' do |job|
           LeaguesChannel.broadcast_to(@league, {
             message: "hey"
           })  
+          time_remaining -= 1
+          if time_remaining < 0
+            job.unschedule
+          end
         end
-        time_remaining -= 1
-      end
     end
     
     def unsubscribed
