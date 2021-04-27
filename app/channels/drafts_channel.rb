@@ -7,14 +7,17 @@ class DraftsChannel < ApplicationCable::Channel
   end
 
   def start_timer
-    time_remaining = 200
-    while (time_remaining >= 0) 
-      LeaguesChannel.broadcast_to(@league, {
-        time_remaining: time_remaining - 1
-      })
-      time_remaining = time_remaining - 1
-      sleep(1)
-    end
+    time_remaining = 7
+      timer = Rufus::Scheduler.new
+        timer.every '1s' do |job|
+          LeaguesChannel.broadcast_to(@league, {
+            draftClock: Time.at(time_remaining).utc.strftime("%M:%S")
+          })  
+          time_remaining -= 1
+          if time_remaining < 0
+            job.unschedule
+          end
+        end
   end
 
   def unsubscribed
