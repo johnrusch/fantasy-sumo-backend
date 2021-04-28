@@ -1,7 +1,8 @@
 class TeamSerializer < ActiveModel::Serializer
-  belongs_to :user, serializer: UserSerializer, include_nested_associations: true
+  belongs_to :user
+  belongs_to :league
   has_many :wrestlers, serializer: WrestlerSerializer
-  attributes :id, :name, :points, :league
+  attributes :id, :name, :points
 
   def rank(current_rank)
     case current_rank
