@@ -4,16 +4,16 @@ class LeagueSerializer < ActiveModel::Serializer
   attributes :id, :name, :closed, :creator_id
 
   def teams
-      self.object.teams.map do |team|
-      {
-      id: team.id,
-      name: team.name,
-      user: team.user,
-      points: team.points,
-      wrestlers: team.wrestlers
-      }
-    end.shuffle
-    
+    unshuffledTeams = self.object.teams.map do |team|
+    {
+    id: team.id,
+    name: team.name,
+    user: team.user,
+    points: team.points,
+    wrestlers: team.wrestlers
+    }
+    end
+    unshuffledTeams.shuffle
   end
 
   
