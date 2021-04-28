@@ -52,8 +52,10 @@ class Api::V1::LeaguesController < ApplicationController
         league = League.all.find {|league| league.id == league_params[:leagueID]}
         if league
             shuffled_teams = league.teams.shuffle
+            LeaguesChannel.broadcast_to(league, {
+                shuffledTeams: shuffled_teams
+            })
             render json: {
-                shuffledTeams: shuffled_teams,
                 draftStarted: true
             }, :status => 200
         else
