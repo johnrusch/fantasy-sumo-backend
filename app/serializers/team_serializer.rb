@@ -1,5 +1,5 @@
 class TeamSerializer < ActiveModel::Serializer
-  belongs_to :user
+  belongs_to :user, serializer: UserSerializer, include_nested_associations: true
   has_many :wrestlers, serializer: WrestlerSerializer
   attributes :id, :name, :points, :league
 
