@@ -54,10 +54,14 @@ class Api::V1::LeaguesController < ApplicationController
             league.closed = true
             league.save
             shuffled_teams = league.teams.shuffle
-            LeaguesChannel.broadcast_to(league, {
+            # LeaguesChannel.broadcast_to(league, {
+            #     shuffledTeams: shuffled_teams,
+            #     draftStarted: true
+            # })
+            render json: {
                 shuffledTeams: shuffled_teams,
                 draftStarted: true
-            })
+            }, :status => 200
         else
             render json: { 
                 error: "League not found",
