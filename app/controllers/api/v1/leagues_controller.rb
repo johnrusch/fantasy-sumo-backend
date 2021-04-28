@@ -50,6 +50,7 @@ class Api::V1::LeaguesController < ApplicationController
 
     def start_draft
         league = League.all.find {|league| league.id == league_params[:leagueID]}
+        draft = Draft.new()
         if league
             LeaguesChannel.broadcast_to(league, {
                 hey: "hey john",
