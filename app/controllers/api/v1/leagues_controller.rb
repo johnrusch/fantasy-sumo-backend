@@ -51,7 +51,7 @@ class Api::V1::LeaguesController < ApplicationController
     def start_draft
         league = League.all.find {|league| league.id == league_params[:leagueID]}
         if league
-            league.closed = true
+            # league.closed = true
             league.save
             shuffled_teams = league.teams.shuffle
             # LeaguesChannel.broadcast_to(league, {
