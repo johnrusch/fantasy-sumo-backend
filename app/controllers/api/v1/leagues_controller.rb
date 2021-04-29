@@ -51,7 +51,15 @@ class Api::V1::LeaguesController < ApplicationController
     def start_draft
         league = League.all.find {|league| league.id == league_params[:leagueID]}
         if league
-            shuffled_teams = league.teams.shuffle
+            shuffled_teams = league.teams.map do |team|
+                {
+                    id: team.id,
+                    name: team.name,
+                    points: team.points,
+                    user: team.user,
+                    league: team.league
+                }
+            end.shuffle
             LeaguesChannel.broadcast_to(league, {
                 shuffledTeams: shuffled_teams
             })
