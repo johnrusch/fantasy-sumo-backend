@@ -61,7 +61,7 @@ class Api::V1::LeaguesController < ApplicationController
             end.shuffle
             LeaguesChannel.broadcast_to(league, {
                 shuffledTeams: shuffled_teams,
-                currentDrafter: shuffled_teams[0].user
+                currentDrafter: shuffled_teams[0][:user]
             })
             render json: {
                 draftStarted: true
