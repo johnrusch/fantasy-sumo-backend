@@ -56,8 +56,7 @@ class Api::V1::LeaguesController < ApplicationController
                     id: team.id,
                     name: team.name,
                     points: team.points,
-                    user: team.user,
-                    league: team.league
+                    user: team.user
                 }
             end.shuffle
             LeaguesChannel.broadcast_to(league, {
