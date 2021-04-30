@@ -1,5 +1,9 @@
 class LeaguesChannel < ApplicationCable::Channel
 
+  def initialize
+    @connected_list = []
+  end
+
     def subscribed
       @league = League.find_by(id: params[:leagueID])
       @user = User.find_by(id: params[:userID])
@@ -25,4 +29,4 @@ class LeaguesChannel < ApplicationCable::Channel
       })
       
     end
-  end
+end
