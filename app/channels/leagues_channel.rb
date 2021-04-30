@@ -1,13 +1,8 @@
 class LeaguesChannel < ApplicationCable::Channel
 
-  def initialize
-    @connected_list = []
-  end
-
     def subscribed
       @league = League.find_by(id: params[:leagueID])
       @user = User.find_by(id: params[:userID])
-      @connected_list.push(@user)
       stream_for @league
     end
 
@@ -18,7 +13,8 @@ class LeaguesChannel < ApplicationCable::Channel
     def appear
       LeaguesChannel.broadcast_to(@league, {
         user_id: @user.id,
-        status: "online"
+        status: "online",
+        users: ActionCable.server.connections
       })
     end
     
