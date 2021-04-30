@@ -3,6 +3,7 @@ class LeaguesChannel < ApplicationCable::Channel
     def subscribed
       @league = League.find_by(id: params[:leagueID])
       @user = User.find_by(id: params[:userID])
+      @connected_list.push(@user)
       stream_for @league
     end
 
