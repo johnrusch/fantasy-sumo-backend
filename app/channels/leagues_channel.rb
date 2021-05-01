@@ -13,8 +13,7 @@ class LeaguesChannel < ApplicationCable::Channel
     def appear
       LeaguesChannel.broadcast_to(@league, {
         user_id: @user.id,
-        status: "online",
-        subscribers: Redis.new.pubsub("channels", "action_cable/*")
+        status: "online"
       })
     end
     
