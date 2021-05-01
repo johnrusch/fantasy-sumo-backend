@@ -13,7 +13,8 @@ class LeaguesChannel < ApplicationCable::Channel
     def appear
       LeaguesChannel.broadcast_to(@league, {
         user_id: @user.id,
-        status: "online"
+        status: "online",
+        online_users: online_users
       })
     end
     
@@ -22,6 +23,14 @@ class LeaguesChannel < ApplicationCable::Channel
         user_id: @user.id,
         status: "offline"
       })
-      
+    end
+
+    private
+    def online_users
+      online_users = []
+      ActionCable.server.connections.each do |conn|
+        online_users.push(conn)
+      end
+      return online_users
     end
 end
