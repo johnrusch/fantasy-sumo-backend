@@ -7,7 +7,7 @@ class LeaguesChannel < ApplicationCable::Channel
     end
 
     def receive(data)
-      LeaguesChannel.broadcast_to(@league, data)
+      LeaguesChannel.broadcast_to(@league, "hello from receive")
     end
 
     def appear
