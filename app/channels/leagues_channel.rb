@@ -16,6 +16,14 @@ class LeaguesChannel < ApplicationCable::Channel
         status: "online"
       })
     end
+
+    def reappear
+      LeaguesChannel.broadcast_to(@league, {
+        user_id: @user.id,
+        status: "online",
+        reappear: true
+      })
+    end
     
     def unsubscribed
       LeaguesChannel.broadcast_to(@league, {
