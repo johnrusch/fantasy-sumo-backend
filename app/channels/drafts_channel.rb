@@ -7,7 +7,7 @@ class DraftsChannel < ApplicationCable::Channel
   end
 
   def start_timer
-    time_remaining = 7
+    time_remaining = 10
     @timer.every '1s' do |job|
           # DraftsChannel.broadcast_to(@league, {
           #   draftClock: Time.at(time_remaining).utc.strftime("%M:%S")
@@ -19,6 +19,7 @@ class DraftsChannel < ApplicationCable::Channel
       end
     end
   end
+
 
   def unsubscribed
     # Any cleanup needed when channel is unsubscribed
