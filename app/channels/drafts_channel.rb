@@ -8,7 +8,7 @@ class DraftsChannel < ApplicationCable::Channel
 
   def start_timer
     time_remaining = 10
-    if @timer.scheduled?
+    if @timer.job.present?
       @timer.kill
     end
     @timer.every '1s' do |job|
