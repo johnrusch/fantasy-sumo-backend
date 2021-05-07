@@ -7,10 +7,8 @@ class DraftsChannel < ApplicationCable::Channel
   end
 
   def start_timer
+    @timer.stop
     time_remaining = 10
-    if @timer.jobs
-      @timer.shutdown
-    end
     @timer.every '1s' do |job|
           # DraftsChannel.broadcast_to(@league, {
           #   draftClock: Time.at(time_remaining).utc.strftime("%M:%S")
