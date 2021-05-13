@@ -12,7 +12,7 @@ class DraftsChannel < ApplicationCable::Channel
         job.unschedule
       end
     end
-    time_remaining = 10
+    time_remaining = 30
     @timer.every '1s' do |job|
       ActionCable.server.broadcast "drafts_channel", draftClock: Time.at(time_remaining).utc.strftime("%M:%S")
       time_remaining -= 1
