@@ -8,7 +8,9 @@ class DraftsChannel < ApplicationCable::Channel
 
   def start_timer
     if @timer.every_jobs.length > 0
-      @timer.terminate_all_jobs
+      @timer.every_jobs.each do |job|
+        job.unschedule
+      end
     end
     time_remaining = 10
     @timer.every '1s' do |job|
