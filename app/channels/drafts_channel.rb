@@ -7,7 +7,6 @@ class DraftsChannel < ApplicationCable::Channel
   end
 
   def start_timer
-    @timer.stop
     time_remaining = 10
     @timer.every '1s' do |job|
           # DraftsChannel.broadcast_to(@league, {
