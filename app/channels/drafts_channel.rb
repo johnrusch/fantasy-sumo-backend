@@ -7,7 +7,9 @@ class DraftsChannel < ApplicationCable::Channel
   end
 
   def start_timer
-    @timer.unschedule_jobs
+    if @timer.every_jobs.length > 0
+      @timer.terminate_all_jobs
+    end
     time_remaining = 10
     @timer.every '1s' do |job|
       ActionCable.server.broadcast "drafts_channel", draftClock: Time.at(time_remaining).utc.strftime("%M:%S")
