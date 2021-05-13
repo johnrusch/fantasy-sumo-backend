@@ -2,7 +2,7 @@ class DraftsChannel < ApplicationCable::Channel
   
 
   def subscribed
-    @timer = Rufus::Scheduler.new
+    @timer = Rufus::Scheduler.singleton
     stream_from "drafts_channel"
   end
 
