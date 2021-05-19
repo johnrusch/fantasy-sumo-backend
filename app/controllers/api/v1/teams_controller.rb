@@ -6,7 +6,7 @@ class Api::V1::TeamsController < ApplicationController
     end
 
     def update
-        team = current_user.teams.find { |team| team.id == params.team.id }
+        team = Team.all.find { |team| team.id == params.team.id }
         wrestler = Wrestler.all.find { |wrestler| wrestler.id == params.wrestler.id }
         team.wrestlers << wrestler
         if team.save
