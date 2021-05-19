@@ -6,8 +6,8 @@ class Api::V1::TeamsController < ApplicationController
     end
 
     def update
-        team = Team.all.find { |team| team.id == params.team.id }
-        wrestler = Wrestler.all.find { |wrestler| wrestler.id == params.wrestler.id }
+        team = Team.all.find { |team| team.id == params.teamID }
+        wrestler = Wrestler.all.find { |wrestler| wrestler.id == params.wrestlerID }
         team.wrestlers << wrestler
         if team.save
             render json: {
